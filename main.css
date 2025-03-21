@@ -1,0 +1,23 @@
+body {
+    background-color: lightblue;
+    color: maroon;
+    font-family: Arial;
+    margin: 0px;
+}
+header {
+    background-color: lavenderblush;
+    color: palevioletred;
+    padding: 5px;
+    font-size: 14pt;
+}
+main {
+    background-color: lightpink;
+    color: blueviolet;
+    padding: 10px;
+}
+footer {
+    background-color: lavenderblush;
+    color: palevioletred;
+    padding: 5px;
+    font-size: 14pt;
+}
