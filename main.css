@@ -21,3 +21,21 @@ footer {
     padding: 5px;
     font-size: 14pt;
 }
+a:link{
+    color: BlueViolet;
+    text-decoration: none;
+}
+a:visited {
+    color: DarkViolet;
+    text-decoration: underline;
+}
+a:hover {
+    color: purple;
+    text-decoration: underline;
+    background-color: violet;
+    box-shadow: 10px 10 px 15px DarkViolet;
+}
+a:active {
+    color: black;
+    opacity: 0.3;
+}
