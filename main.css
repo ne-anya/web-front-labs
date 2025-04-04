@@ -21,6 +21,11 @@ footer {
     padding: 5px;
     font-size: 14pt;
 }
+a {
+    color: green;
+    text-decoration: none;
+    transition: 1s 2s;
+}
 a:link{
     color: BlueViolet;
     text-decoration: none;
@@ -34,6 +39,7 @@ a:hover {
     text-decoration: underline;
     background-color: violet;
     box-shadow: 10px 10 px 15px DarkViolet;
+    transition: 0.3s;
 }
 a:active {
     color: black;
