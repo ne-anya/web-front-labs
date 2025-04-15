@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Комикс</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <style>
+        div {
+            border-radius: 50%;
+            background-color: beige;
+            text-align: center;
+            border: 3px solid SaddleBrown;
+            color: Brown;
+            font-size: 14pt;
+            box-shadow: 10px 10px 15px SaddleBrown;
+        }
+        .cloud1 {
+            position: relative;
+            width: 100px;
+            height: 50px;
+            bottom: 350px;
+            left: 500px;
+            display: none;
+
+        }
+        .cloud2 {
+            position: relative;
+            width: 150px;
+            height: 75px;
+            bottom: 500px;
+            left:350px;
+            display: none;
+        }
+        .cloud3 {
+            position: relative;
+            width: 200px;
+            height: 100px;
+            line-height: 100px;
+            bottom: 700px;
+            left: 200px;
+            display: none;
+        }
+        img:hover+.cloud1 {
+            display: block;
+        }
+        img:hover+.cloud1+.cloud2 {
+            display: block;
+        }
+        img:hover+.cloud1+.cloud2+.cloud3 {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 2
+        <hr>
+    </header>
+    
+    <main>
+        <img src="лосяш.jpg">
+        <div class="cloud1"></div>
+        <div class="cloud2"></div>
+        <div class="cloud3">Феноменально!</div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
