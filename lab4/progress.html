@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Панель прогресса</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <style>
+        .progress {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 100px);
+            border-radius: 5px;
+        }
+        .progress-container {
+            border: 5px solid SkyBlue;
+            background-color: Lavender;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 5px 5px 15px DarkGray;
+            text-align: center;
+            width: 300px;
+            height: 150px;
+            padding: 30px;
+        }
+        .title {
+            color: MidnightBlue;
+            font-size: 20pt;
+        }
+        .progress-bar {
+            background-color: LightSteelBlue;
+            border-radius: 8px;
+            border: 2px solid SteelBlue;
+            height: 18px;
+            margin: 25px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-fill {
+            background: linear-gradient(to right, LightSkyBlue, DodgerBlue);
+            height: 100%;
+            width: 0;
+            transition: width 10s linear;
+        }
+        .hold-button {
+            background-color: LightSteelBlue;
+            border: 2px solid SteelBlue;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .hold-button:hover {
+            box-shadow: 2px 3px 9px ;
+        }
+
+        .hold-button:active {
+            box-shadow: none;
+        }
+
+        .progress-container:active .progress-fill {
+            width: 100%;
+            transition: width 5s linear;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 4
+        <hr>
+    </header>
+
+    <main>
+        <div class="progress">
+            <div class="progress-container">
+                <div class="title">Степень прогресса</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <button class="hold-button">Нажмите и удерживайте</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025 
+    </footer>
+</body>
+</html>
