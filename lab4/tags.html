@@ -17,15 +17,27 @@
            position: relative;
            overflow: hidden;
         }
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, -10px) rotate(5deg); }
+            100% { transform: translate(-10px, 10px) rotate(-5deg); }
+        }
+    
         .tag {
             position: absolute;
             z-index: 0;
             cursor: pointer;
+            animation-name: float;
+            animation-duration: 8s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
         }
         .tag:hover {
             transform: scale(2);
             text-shadow: 2px 3px 9px darkgray;
             z-index: 17;
+            animation-play-state: paused;
         }
         .t1 {
             font-size: 90pt;
@@ -33,6 +45,7 @@
             top: 45%;
             color: DeepSkyBlue;
             transform: rotate(10deg);
+            animation-delay: 0s;
         }
         .t2 {
             font-size: 85pt;
@@ -40,6 +53,7 @@
             top: 25%;
             color: Green;
             transform: rotate(-15deg);
+            animation-delay: 1s;
         }
         .t3 {
             font-size: 80pt;
@@ -47,6 +61,7 @@
             top: 45%;
             color: Red;
             transform: rotate(5deg);
+            animation-delay: 2s;
         }
         .t4 {
             font-size: 70pt;
@@ -54,6 +69,7 @@
             top: 70%;
             color: Magenta;
             transform: rotate(-5deg);
+            animation-delay: 0.5s;
         }
         .t5 {
             font-size: 75pt;
@@ -61,6 +77,7 @@
             top: 15%;
             color: Maroon;
             transform: rotate(25deg);
+            animation-delay: 1.5s;
         }
         .t6 {
             font-size: 87pt;
@@ -68,6 +85,7 @@
             top: 25%;
             color: Yellow;
             transform: rotate(-25deg);
+            animation-delay: 2.5s;
         }
         .t7 {
             font-size: 85pt;
@@ -75,6 +93,7 @@
             top: 37%;
             color: Purple;
             transform: rotate(30deg);
+            animation-delay: 0.8s;
         }
         .t8 {
             font-size: 78pt;
@@ -82,6 +101,7 @@
             top: 75%;
             color: OliveDrab;
             transform: rotate(-30deg);
+            animation-delay: 1.2s;
         }
         .t9 {
             font-size: 80pt;
@@ -89,12 +109,14 @@
             top: 65%;
             color: Salmon;
             transform: rotate(-15deg);
+            animation-delay: 1.8s;
         }
         .t10 {
             font-size: 88pt;
             left: 10%;
             top: 45%;
             transform: rotate(10deg);
+            animation-delay: 0.3s;
         }
         .t11 {
             font-size: 90pt;
@@ -102,6 +124,7 @@
             top: 57%;
             color: MediumBlue;
             transform: rotate(-30deg);
+            animation-delay: 2.2s;
         }
         .t12 {
             font-size: 87pt;
@@ -109,6 +132,7 @@
             top: 80%;
             color: Gold;
             transform: rotate(5deg);
+            animation-delay: 0.9s;
         }
         .t13 {
             font-size: 70pt;
@@ -116,18 +140,21 @@
             top: 15%;
             color: DarkOrange;
             transform: rotate(15deg);
+            animation-delay: 1.3s;
         }
         .t14 {
             font-size: 65pt;
             left: 35%;
             top: 57%;
             color: DarkCyan;
+            animation-delay: 2.6s;
         }
         .t15 {
             font-size: 50pt;
             left: 60%;
             top: 30%;
             color: DeepPink;
+            animation-delay: 0.4s;
         }
         .t16 {
             font-size: 45pt;
@@ -135,6 +162,7 @@
             top: 78%;
             color: Goldenrod;
             transform: rotate(-5deg);
+            animation-delay: 1.6s;
         }
         .t17 {
             font-size: 45pt;
@@ -142,6 +170,7 @@
             top: 25%;
             color: Lime;
             transform: rotate(15deg);
+            animation-delay: 2.8s;
         }
     </style>
 </head>
