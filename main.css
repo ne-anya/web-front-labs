@@ -26,7 +26,7 @@ footer {
     right: 0;
     left: 0;
 }
-/* a {
+a {
     color: green;
     text-decoration: none;
     transition: 1s 2s;
@@ -49,7 +49,7 @@ a:hover {
 a:active {
     color: black;
     opacity: 0.3;
-} */
+} 
 
 div.menu {
     border: 7px solid BlueViolet;
