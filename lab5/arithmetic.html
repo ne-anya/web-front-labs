@@ -98,15 +98,24 @@
             inputB.style.color = ' ';
             inputB.style.borderColor = ' ';
             let result = a**b;
-            alert('Число ' + a + ' В степени ' + b +' равно ' + result)
+            alert('Число ' + a + ' В степени ' + b +' равно ' + result);
         }
         function showAuthor() {
-            let author = 'Авторка страницы:\nВотчинникова Анна'
-            alert(author)
+            let author = 'Авторка страницы:\nВотчинникова Анна';
+            alert(author);
         }
         function showHello() {
-            let hello = 'Приветствую вас на моей странице!\nЯ просто выгляжу как лось, а в душе я бабочка.'
-            alert(hello)
+            let hello = 'Приветствую вас на моей странице!\nЯ просто выгляжу как лось, а в душе я бабочка.';
+            alert(hello);
+        }
+        function changeOutput(buttonNum, backColor, textColor, borderWidth, borderRadius, borderStyle) {
+            let output = document.getElementById('output');
+            output.innerHTML = 'Нажата кнопка ' + buttonNum;
+            output.style.backgroundColor = backColor;
+            output.style.color = textColor;
+            output.style.borderWidth = borderWidth;
+            output.style.borderRadius = borderRadius;
+            output.style.borderStyle = borderStyle;
         }
     </script>
     <style>
@@ -127,6 +136,11 @@
         footer {
             cursor: pointer;
         }
+        #output {
+            border: 1px solid;
+            width: 300px;
+            height: 40px;
+        }
     </style>
 </head>
 <body>
@@ -144,6 +158,15 @@
         <div class="message" onclick="showDiv()">Найти отношение чисел</div>
         <div class="message" onclick="showDeg()">Возвести в степень</div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
+
+        <div>
+            <input type="button" value="Кнопка1" onclick="changeOutput(1, 'LightCoral', 'indigo', '5px', '3px', 'solid')">
+            <input type="button" value="Кнопка2" onclick="changeOutput(2, 'Violet', 'BlueViolet', '2px', '5px', 'dotted')">
+            <input type="button" value="Кнопка3" onclick="changeOutput(3, 'PaleGreen', 'ForestGreen', '1px', '10px', 'dashed')">
+            <input type="button" value="Кнопка4" onclick="changeOutput(4, 'PaleTurquoise', 'SteelBlue', '4px', '15px', 'ridge')">
+        </div>
+
+        <div id="output"></div>
     </main>
 
     <footer ondblclick="showHello()">
