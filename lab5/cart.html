@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Корзина</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script>
+        function findResult() {
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let inputC = document.getElementById('numberC');
+            let inputD = document.getElementById('numberD');
+            let inputE = document.getElementById('numberE');
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+            let c = parseInt(inputC.value);
+            let d = parseInt(inputD.value);
+            let e = parseInt(inputE.value);
+            let result = document.getElementById('result');
+
+            let summ = a * 100 + b * 80 + c * 150 + d * 300 + e * 130;
+            result.innerHTML = 'Общаяя сумма: ' + summ + 'р';
+        }
+        function clearResult() {
+            document.getElementById('numberA').value = '';
+            document.getElementById('numberB').value = '';
+            document.getElementById('numberC').value = '';
+            document.getElementById('numberD').value = '';
+            document.getElementById('numberE').value = '';
+            document.getElementById('result').innerText = '';
+        }
+    </script>
+    <style>
+        .cart {
+            width: 250px;
+            height: 370px;
+            border: 3px solid;
+            border-radius: 10px;
+            
+        }
+        .title {
+            text-align: center;
+            font-size: 18pt;
+            margin: 5px;
+            color: DarkMagenta;
+        }
+        label {
+            color: DarkViolet;
+        }
+        input {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 5
+        <hr>
+    </header>
+
+    <main>
+        <div class="cart">
+            <div class="title">Корзина товаров</div>
+            <label>Яблоки(100р/шт):<br><input type="number" id="numberA" placeholder="Введите количество яблок" min="0"></label><br>
+            <label>Груши(80р/шт):<br><input type="number" id="numberB" placeholder="Введите количество груш" min="0"></label><br>
+            <label>Апельсины(150р/шт):<br><input type="number" id="numberC" placeholder="Введите количество апельсинов" min="0"></label><br>
+            <label>Дыни(300р/шт):<br><input type="number" id="numberD" placeholder="Введите количество дынь" min="0"></label><br>
+            <label>Бананы(130р/шт):<br><input type="number" id="numberE" placeholder="Введите количество бананов" min="0"></label><br>
+
+            <input type="button" value="Рассчитать" onclick="findResult()"><br>
+            <div id="result"></div>
+            <input type="button" value="Очистить" onclick="clearResult()">
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
