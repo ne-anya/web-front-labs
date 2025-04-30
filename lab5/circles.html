@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Круги</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script>
+        function hideCircle(circleNum) {
+            const circle = document.getElementById('circle' + circleNum);
+            circle. classList.add('hidden');
+        }
+        function returnCircle() {
+            const allCircles = document.querySelectorAll('.circle');
+            allCircles.forEach(function(circle){
+                circle.classList.remove('hidden');
+            });
+        }
+    </script>
+
+    <style>
+        .circle {
+            position: absolute;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            border: 2px solid black;
+            font-size: 20pt;
+            border-radius: 50%;
+            color: black;
+            transition: all 0.5s ease;
+        }
+        .hidden {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            padding: 0;
+            line-height: 0;
+        }
+        #circle1 {
+            left: 50%;
+            top: 75%;
+            background-color: red;
+        }
+        #circle2 {
+            left: 25%;
+            top: 45%;
+            background-color: DarkOrange;
+        }
+        #circle3 {
+            left: 78%;
+            top: 57%;
+            background-color: yellow;
+        }
+        #circle4 {
+            left: 15%;
+            top: 67%;
+            background-color: Chartreuse;
+        }
+        #circle5 {
+            left: 80%;
+            top: 25%;
+            background-color: ForestGreen;
+        }
+        #circle6 {
+            left: 45%;
+            top: 20%;
+            background-color: DeepSkyBlue;
+        }
+        #circle7 {
+            left: 10%;
+            top: 45%;
+            background-color: blue;
+        }
+        #circle8 {
+            left: 55%;
+            top: 45%;
+            background-color: BlueViolet;
+        }
+        #circle9 {
+            left: 25%;
+            top: 20%;
+            background-color: Fuchsia;
+        }
+        #circle10 {
+            left: 65%;
+            top: 15%;
+            background-color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 5
+        <hr>
+    </header>
+
+    <main>
+        <input type="button" value="Вернуть круги" onclick="returnCircle()">
+        <div class="circle" id="circle1" onclick="hideCircle(1)">1</div>
+        <div class="circle" id="circle2" onclick="hideCircle(2)">2</div>
+        <div class="circle" id="circle3" onclick="hideCircle(3)">3</div>
+        <div class="circle" id="circle4" onclick="hideCircle(4)">4</div>
+        <div class="circle" id="circle5" onclick="hideCircle(5)">5</div>
+        <div class="circle" id="circle6" onclick="hideCircle(6)">6</div>
+        <div class="circle" id="circle7" onclick="hideCircle(7)">7</div>
+        <div class="circle" id="circle8" onclick="hideCircle(8)">8</div>
+        <div class="circle" id="circle9" onclick="hideCircle(9)">9</div>
+        <div class="circle" id="circle10" onclick="hideCircle(10)">10</div>
+    </main>
+    
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
