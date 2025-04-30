@@ -14,7 +14,11 @@
             document.getElementById('blurOutput').innerText = value;
             document.getElementById('blurImage').style.filter = 'blur(' + value + ')';
         }
-        
+        function brightnessChange() {
+            let value = document.getElementById('brightnessValue').value + '%';
+            document.getElementById('brightnessOutput').innerText = value;
+            document.getElementById('brightnessImage').style.filter = 'brightness(' + value + ')';
+        } 
     </script>
 
     <style>
@@ -39,6 +43,13 @@
             <span id="blurOutput"></span>
         </div>
         <div><img src="london.jpg" id="blurImage"></div>
+
+        <div>
+            Фильтр brightness:
+            <input type="range" min="0" max="200" value="100" onchange="brightnessChange()" id="brightnessValue">
+            <span id="brightnessOutput"></span>
+        </div>
+        <div><img src="worcester-tower.jpg" id="brightnessImage"></div>
     </main>
 
     <footer>
