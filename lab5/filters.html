@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Фильтры</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script>
+        function blurChange() {
+            let value = document.getElementById('blurValue').value + 'px';
+            document.getElementById('blurOutput').innerText = value;
+            document.getElementById('blurImage').style.filter = 'blur(' + value + ')';
+        }
+        
+    </script>
+
+    <style>
+        div {
+            font-size: 16pt;
+        }
+        img {
+            width: 700px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 5
+        <hr>
+    </header>
+
+    <main>
+        <div>
+            Фильтр blur:
+            <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
+            <span id="blurOutput"></span>
+        </div>
+        <div><img src="london.jpg" id="blurImage"></div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
