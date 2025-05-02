@@ -39,6 +39,11 @@
             document.getElementById('invertOutput').innerText = value;
             document.getElementById('invertImage').style.filter = 'invert(' + value + ')';
         }
+        function saturateChange() {
+            let value = document.getElementById('saturateValue').value + '%';
+            document.getElementById('saturateOutput').innerText = value;
+            document.getElementById('saturateImage').style.filter = 'saturate(' + value + ')';
+        }
         </script>
 
     <style>
@@ -98,6 +103,13 @@
             <span id="invertOutput"></span>
         </div>
         <div><img src="cologne-cathedral.webp" id="invertImage"></div>
+
+        <div>
+            Фильтр saturate:
+            <input type="range" min="0" max="200" value="100" onchange="saturateChange()" id="saturateValue">
+            <span id="saturateOutput"></span>
+        </div>
+        <div><img src="notre-dam.jpg" id="saturateImage"></div>
     </main>
 
     <footer>
