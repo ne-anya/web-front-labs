@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Лабораторная работа №5</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const img = document.getElementById("img");
+        const filterName = document.getElementById("filterName");
+        const filterValue = document.getElementById("filterValue");
+
+        let currentFilter = "blur";
+
+        const filters = {
+            "blur": (amount) => `blur(${amount * 10}px)`,
+            "grayscale": (amount) => `grayscale(${amount})`,
+            "hue-rotate": (amount) => `hue-rotate(${amount * 360}deg)`,
+            "sepia": (amount) => `sepia(${amount})`
+        };
+
+        const filterLabels = {
+            "blur": (val) => `${(val * 10).toFixed(2)}px`,
+            "grayscale": (val) => `${(val * 100).toFixed(0)}%`,
+            "hue-rotate": (val) => `${(val * 360).toFixed(0)}deg`,
+            "sepia": (val) => `${(val * 100).toFixed(0)}%`
+        };
+
+        function applyFilter(amount) {
+            img.style.filter = filters[currentFilter](amount);
+            filterName.textContent = `Фильтр: ${currentFilter}`;
+            filterValue.textContent = `Выраженность: ${filterLabels[currentFilter](amount)}`;
+        }
+
+        function resetFilter() {
+            img.style.filter = "none";
+            filterName.textContent = "Фильтр: Нет";
+            filterValue.textContent = "Выраженность: 0";
+        }
+
+        function handleMouseMove(e) {
+            const rect = img.getBoundingClientRect();
+            const amount = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+            applyFilter(amount);
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === "Control") currentFilter = "grayscale";
+            else if (e.key === "Alt") currentFilter = "hue-rotate";
+            else if (e.key === "Shift") currentFilter = "sepia";
+        }
+
+        function handleKeyUp() {
+            currentFilter = "blur";
+        }
+
+        img.addEventListener("mousemove", handleMouseMove);
+        img.addEventListener("mouseout", resetFilter);
+        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("keyup", handleKeyUp);
+        });
+    </script>
+    <style>
+        #img {
+        max-width: 500px;
+        height: auto;
+        transition: filter 0.1s ease-out;
+        }
+
+        #filterInfo {
+        margin-top: 10px;
+        }
+
+        #helpText {
+        margin-top: 20px;
+        font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 5
+        <hr>
+    </header>
+
+    <main>
+        <img id="img" src="london.jpg" alt="Картинка">
+
+        <div id="filterInfo">
+            <p id="filterName">Фильтр: Нет</p>
+            <p id="filterValue">Выраженность: 0</p>
+        </div>
+
+        <div id="helpText">
+            <p>Наведите курсор на изображение, чтобы применить фильтр blur.  Чем левее курсор, тем слабее эффект. Чем правее - тем сильнее.</p>
+            <p>Удерживайте Ctrl для применения фильтра grayscale.</p>
+            <p>Удерживайте Alt для применения фильтра hue-rotate.</p>
+            <p>Удерживайте Shift для применения фильтра sepia.</p>
+        </div>
+    </main>
+</body>
+</html>
