@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Таблица умноения</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script>
+        function showMultipleTable() {
+            let multiplier = parseInt(document.getElementById('multiplier').value);
+            let start = parseInt(document.getElementById('start').value);
+            let end = parseInt(document.getElementById('end').value);
+
+            if (isNaN(multiplier) || isNaN(start) || isNaN(end)) {
+                alert("Пожалуйста, введите числа во все поля.");
+                return;
+            }
+
+            if (start > end) {
+                alert("'Начать с' не может быть больше, чем 'Закончить на'. Поменяйте значения.");
+                return;
+            }
+
+            let tbl = document.getElementById('mtable');
+            tbl.innerHTML = '<h1>Таблица умножения</h1>';
+
+            for (let i = start; i <= end; i++) {
+                let s = `<div>${i} * ${multiplier} = ${(i * multiplier)}</div>`; 
+                tbl.innerHTML += s;
+            }
+        }
+    </script>
+    <style>
+        #mtable {
+            width: 300px;
+            height: 450px;
+            border: 3px solid;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 16pt;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body onload="showMultipleTable()">
+    <header>
+        НГТУ, ФБ, Лабораторная 6
+        <hr>
+    </header>
+
+    <main>
+        <div id="mtable"></div>
+        <hr>
+        <label>Умножить на:<input type="number" id="multiplier" value="7"></label><br>
+        <label>Начать с:<input type="number" id="start" value="1"></label><br>
+        <label>Закончить на:<input type="number" id="end" value="10"></label><br>
+        <input type="button" value="Таблица" onclick="showMultipleTable()"><br>
+    </main>
+    
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
