@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Диаграмма</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script>
+        function showDiagram() {
+            let data = [45, 37, 89, 97, 56, 25, 67, 78, 43, 55];
+            let color = ['Salmon', 'Coral', 'Gold', 'YellowGreen', 'PaleGreen', 'SkyBlue', 'DeepSkyBlue', 'MediumPurple', 'Violet', 'HotPink']
+            let bars = document.getElementsByClassName('bar');
+            const diagHeight = document.getElementById('diag').clientHeight;
+            const maxData = Math.max(...data);
+            const k = diagHeight/maxData * 0.9;
+            for (let i=0; i<data.length; i++) {
+                bars[i].style.height = k * data[i] + 'px';
+                bars[i].style.backgroundColor = color[i];
+                let heightValue = document.createElement('span');
+                heightValue.textContent = data[i];
+                bars[i].appendChild(heightValue);
+                heightValue.style.display = 'block';
+                heightValue.style.textAlign = 'center';
+                heightValue.style.fontSize = '12px';
+            }
+        }
+    </script>
+    <style>
+        #diag {
+            width: 500px;
+            height: 500px;
+            padding: 1px;
+            border: 3px solid;
+            display: flex; 
+            align-items: flex-end;
+        }
+        .bar {
+            flex-grow: 1;
+            width: 200px;
+            height: 48.9px;
+            margin: 1px;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body onload="showDiagram()">
+    <header>
+        НГТУ, ФБ, Лабораторная 6
+        <hr>
+    </header>
+
+    <main>
+        <div id="diag">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
