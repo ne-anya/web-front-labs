@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Список книг</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script src="books.js"></script>
+    <script>
+       function showBooks() {
+        const booList = document.getElementById('bookList')
+        for(let i = 0; i < books.length; i++) {
+            const bestsellerClass = books[i].bestseller ? ' bestseller' : '';
+            const outOfStockClass = books[i].inStock ? '' : ' out-of-stock';
+            const bestsellerLabel = books[i].bestseller ? `<div class="bestseller-label">Бестселлер</div>` : '';
+            const stockNote = books[i].inStock ? '' : `<div class="stock-note">Этой книги сейчас нет в наличии</div>`;
+            booList.innerHTML += `
+                <div class="book-card${bestsellerClass}${outOfStockClass}">
+                    ${bestsellerLabel}
+                    <b> ${ books[i].author }.</b>
+                    <i> ${ books[i].name }.</i>
+                    &mdash; ${ books[i].publicationYear },
+                    <div>${books[i].price} ₽</div>
+                    ${stockNote}
+                </div>
+            `
+        }
+       } 
+    </script>
+    <style>
+        h1 {
+            color: Indigo;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            border-bottom: 2px solid DarkViolet;
+            padding-bottom: 10px;  
+        }
+        .book-card {
+            background: Lavender;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 5px;
+        }
+        .bestseller {
+            background: #fff0f5; 
+            border: 2px solid #c71585; 
+            box-shadow: 0 0 10px #c71585; 
+        }
+        .bestseller-label {
+            font-weight: bold;
+            color: #c71585; 
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        .out-of-stock {
+            opacity: 0.5; 
+        }
+        .stock-note {
+            color: #a00;
+            font-style: italic;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body onload="showBooks()">
+    <header>
+        НГТУ, ФБ, Лабораторная 6
+        <hr>
+    </header>
+
+    <main>
+        <h1>Список книг</h1>
+        <div id="bookList">
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>

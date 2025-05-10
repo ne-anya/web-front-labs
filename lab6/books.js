@@ -1,0 +1,82 @@
+const books = [
+    {
+        author: 'Виктор Гюго',
+        name: 'Собор Парижской Богоматери',
+        publicationYear: '1831',
+        price: '670',
+        bestseller: true,
+        inStock: true
+    },
+    {
+        author: 'Дэн Браун',
+        name: 'Код да Винчи',
+        publicationYear: '2003',
+        price: '550',
+        bestseller: true,
+        inStock: false,
+    },
+    {
+        author: 'Уильям Мейкпис Теккерей',
+        name: 'Ярмарка Тщеславия',
+        publicationYear: '1847',
+        price: '600',
+        bestseller: false,
+        inStock: true
+    },
+    {
+        author: "Фёдор Достоевский", 
+        name: "Преступление и наказание", 
+        publicationYear: '1866', 
+        price: '450', 
+        bestseller: true,
+        inStock: true
+    },
+    {
+        author: "Лев Толстой", 
+        name: "Война и мир", 
+        publicationYear: '1869', 
+        price: '680', 
+        bestseller: false,
+        inStock: true,
+    },
+    {
+        author: "Антон Чехов", 
+        name: "Вишнёвый сад", 
+        publicationYear: '1904', 
+        price: '320', 
+        bestseller: true,
+        inStock: false,
+    },
+    {
+        author: "Иван Тургенев", 
+        name: "Отцы и дети", 
+        publicationYear: '1862', 
+        price: '390', 
+        bestseller: false,
+        inStock: false,
+    },
+    {
+        author: "Николай Гоголь", 
+        name: "Мёртвые души", 
+        publicationYear: '1842', 
+        price: '410', 
+        bestseller: true,
+        inStock: true,
+    },
+    {
+        author: "Михаил Булгаков",
+        name: "Мастер и Маргарита", 
+        publicationYear: '1967', 
+        price: '520', 
+        bestseller: true,
+        inStock: true,
+    },
+    {
+        author: "Лев Толстой", 
+        name: "Анна Каренина", 
+        publicationYear: '1877', 
+        price: '550', 
+        bestseller: true,
+        inStock: false,
+    },
+]
