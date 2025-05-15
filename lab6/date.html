@@ -27,8 +27,32 @@
             document.getElementById('locale-dates').innerHTML = localeDates;
         
         }
+
+        function changeColors() {
+            const header = document.getElementsByTagName('header')[0];
+            const rgb = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            header.style.color = rgb;
+        }
+
+        let timerNum;
+
+        function startChangeColors() {
+            changeColors();
+            setInterval(changeColors, 2000);
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+        }
+
+        function stopChangeColors() {
+            clearInterval(timerNum);
+            document.getElementById('stop-btn').disabled = true;
+            document.getElementById('start-btn').disabled = false;
+        }
     </script>
     <style>
+        header {
+            transition: color 1.5s ease-in-out;
+        }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
         }
@@ -59,6 +83,10 @@
     <main>
         <div id="current-date"></div>
         <div id="locale-dates"></div>
+        <div>
+            <button onclick="startChangeColors()" id="start-btn">Старт</button>
+            <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
+        </div>
     </main>
 
     <footer>
