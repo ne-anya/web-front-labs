@@ -28,6 +28,25 @@
         
         }
 
+        function startUpdatingTime() {
+            showDate();
+            timerNum = setInterval(showDate, 1000); 
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+        }
+
+        function stopUpdatingTime() {
+            clearInterval(timerNum);
+            document.getElementById('stop-btn').disabled = true;
+            document.getElementById('start-btn').disabled = false;
+        }
+
+        window.onload = function() {
+            showDate();
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+        };
+
         function changeColors() {
             const header = document.getElementsByTagName('header')[0];
             const rgb = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
@@ -83,6 +102,9 @@
     <main>
         <div id="current-date"></div>
         <div id="locale-dates"></div>
+        <div>
+            <button id="start-btn" onclick="startUpdatingTime()">Обновлять время</button>
+            <button id="stop-btn" onclick="stopUpdatingTime()" disabled>Остановить обновление времени</button>
         <div>
             <button onclick="startChangeColors()" id="start-btn">Старт</button>
             <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
