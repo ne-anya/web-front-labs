@@ -11,7 +11,7 @@
     <script src="books.js"></script>
     <script>
        function showBooks() {
-        const booList = document.getElementById('bookList')
+        const booList = document.getElementById('bookList');
         for(let i = 0; i < books.length; i++) {
             const bestsellerClass = books[i].bestseller ? ' bestseller' : '';
             const outOfStockClass = books[i].inStock ? '' : ' out-of-stock';

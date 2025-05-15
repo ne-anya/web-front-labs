@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вотчинникова Анна Андреевна. Дата-время</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script>
+        function showDate() {
+            let out = document.getElementById('current-date');
+            let today = new Date();
+            out.innerHTML = `<div><b>Россия (ru-RU):</b> ${today.toLocaleString('ru-RU')}`;
+            const locales = [
+                { code: 'en-US', label: 'США (en-US)' },
+                { code: 'de-DE', label: 'Германия (de-DE)' },
+                { code: 'fr-FR', label: 'Франция (fr-FR)' },
+                { code: 'ja-JP', label: 'Япония (ja-JP)' },
+                { code: 'zh-CN', label: 'Китай (zh-CN)' }
+            ];
+            let localeDates = '';
+            for (let loc of locales) {
+                localeDates += `<div><b>${loc.label}:</b> ${today.toLocaleString(loc.code)}</div>`;
+            }
+            document.getElementById('locale-dates').innerHTML = localeDates;
+        
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        #current-date {
+            font-size: 1.4em;
+            color: #4B0082;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px 0 20px 0;
+        }
+        #locale-dates {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 18px 28px;
+            background: #f0e6ff;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(75,0,130,0.09);
+            border: 1.5px solid #d1b3ff;
+        }
+    </style>
+</head>
+<body onload="showDate()">
+    <header>
+        НГТУ, ФБ, Лабораторная 6
+        <hr>
+    </header>
+    
+    <main>
+        <div id="current-date"></div>
+        <div id="locale-dates"></div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
