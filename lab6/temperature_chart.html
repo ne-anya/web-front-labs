@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вотчинникова Анна Андреевна. Столбчатая диаграмма температур</title>
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../favicon-16x16.png" />
+    <link rel="shortcut icon" href="../favicon-32x32.png" />
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const days = 30;
+            const temperatures = [];
+            for (let i = 0; i < days; i++) {
+                let min = Math.floor(Math.random() * 16) + 5; 
+                let max = min + Math.floor(Math.random() * 16) + 5; 
+                temperatures.push({ min, max });
+            }
+
+            const barsDiv = document.getElementById('bars');
+            const maxTemp = Math.max(...temperatures.map(t => t.max));
+            const minTemp = Math.min(...temperatures.map(t => t.min));
+            const chartHeight = 320; 
+
+            function renderBars(selectedIndex = null) {
+                barsDiv.innerHTML = '';
+                temperatures.forEach((t, i) => {
+                    const totalHeight = chartHeight;
+                    const minHeight = ((t.min - minTemp) / (maxTemp - minTemp) * totalHeight) || 5;
+                    const maxHeight = ((t.max - t.min) / (maxTemp - minTemp) * totalHeight) || 5;
+                    const bar = document.createElement('div');
+                    bar.className = 'bar' + (selectedIndex === i ? ' selected' : '');
+                    bar.innerHTML = `
+                        <div class="bar-max" style="height:${maxHeight}px"></div>
+                        <div class="bar-min" style="height:${minHeight}px"></div>
+                        <div class="temp-label max">${t.max}&deg;C</div>
+                        <div class="temp-label min">${t.min}&deg;C</div>
+                    `;
+                    bar.onclick = () => selectDay(i);
+                    barsDiv.appendChild(bar);
+                });
+            }
+
+            function selectDay(idx) {
+                renderBars(idx);
+                document.getElementById('day-input').value = idx + 1;
+                showInfo(idx);
+            }
+
+            function highlightDay() {
+                const val = parseInt(document.getElementById('day-input').value, 10);
+                if (val >= 1 && val <= days) {
+                    selectDay(val - 1);
+                }
+            }
+
+            function showInfo(idx) {
+                const t = temperatures[idx];
+                document.getElementById('info').innerHTML = `
+                    <span>Минимальная температура: <span class="value">${t.min}&deg;C</span></span><br>
+                    <span>Максимальная температура: <span class="value">${t.max}&deg;C</span></span>
+                `;
+            }
+
+            const dayInput = document.getElementById('day-input');
+            dayInput.addEventListener('input', function () {
+                if (!this.value) {
+                    renderBars();
+                    document.getElementById('info').innerHTML = '';
+                }
+            });
+
+            renderBars();
+
+            window.highlightDay = highlightDay;
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7fa;
+        }
+        .chart-container {
+            width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #eaf0fa;
+            border-radius: 10px;
+            border: 1px solid #b3c6e6;
+        }
+        .bars {
+            display: flex;
+            align-items: flex-end;
+            height: 350px;
+            border-bottom: 2px solid #b3c6e6;
+            margin-bottom: 20px;
+        }
+        .bar {
+            width: 22px;
+            margin: 0 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .bar-max {
+            background: #bce0fa;
+            width: 100%;
+            border-radius: 4px 4px 0 0;
+            z-index: 1;
+        }
+        .bar-min {
+            background: #1e3fa6;
+            width: 100%;
+            border-radius: 0 0 4px 4px;
+            z-index: 2;
+        }
+        .bar.selected .bar-min,
+        .bar.selected .bar-max {
+            background: #ffb3a6 !important;
+        }
+        .temp-label {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9em;
+            color: #222;
+            font-weight: bold;
+            pointer-events: none;
+        }
+        .temp-label.max {
+            top: -20px;
+        }
+        .temp-label.min {
+            bottom: -20px;
+        }
+        .controls {
+            margin: 10px 0;
+        }
+        .info {
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+        .info .value {
+            color: #c0392b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 6
+        <hr />
+    </header>
+
+    <main>
+        <div class="chart-container">
+            <div class="bars" id="bars"></div>
+            <div class="controls">
+                <label for="day-input">Номер дня: </label>
+                <input type="number" id="day-input" min="1" max="30" style="width: 50px;" />
+                <button onclick="highlightDay()">найти</button>
+            </div>
+            <div class="info" id="info"></div>
+        </div>
+    </main>
+
+    <footer>
+        <hr />
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+
+   
+</body>
+</html>
