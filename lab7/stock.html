@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Котировка акций компании Русснефть</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script src="stock-data.js"></script>
+    <script>
+       function showStockTable() {
+            const table = document.getElementById('stock-table');
+            table.innerHTML = ''; 
+
+            let header = table.insertRow();
+            header.insertCell().outerHTML = "<th>Дата</th>";
+            header.insertCell().outerHTML = "<th>Цена акций</th>";
+            header.insertCell().outerHTML = "<th>Разница</th>";
+
+            for (let i = 0; i < dates.length; i++) {
+                let row = table.insertRow();
+                row.insertCell().innerText = dates[i];
+                row.insertCell().innerText = prices[i];
+
+                let diffCell = row.insertCell();
+                if (i === 0) {
+                    diffCell.innerHTML = '—';
+                } else {
+                    let diff = prices[i] - prices[i - 1];
+                    if (diff > 0) {
+                        diffCell.innerHTML = '+' + diff;
+                        diffCell.className = 'positive';
+                    } else if (diff < 0) {
+                        diffCell.innerHTML = diff;
+                        diffCell.className = 'negative';
+                    } else {
+                        diffCell.innerHTML = '0';
+                        diffCell.className = 'zero';
+                    }
+                }
+            }
+
+            const sum = prices.reduce((a, b) => a + b, 0);
+            const avg = (sum / prices.length).toFixed(2);
+            const max = Math.max(...prices);
+            const min = Math.min(...prices);
+
+            let statsDiv = document.getElementById('stock-stats');
+            if (!statsDiv) {
+                statsDiv = document.createElement('div');
+                statsDiv.id = 'stock-stats';
+                table.parentNode.appendChild(statsDiv);
+            }
+            statsDiv.innerHTML = `
+                <p>Среднее значение стоимости акции: <b>${avg}</b></p>
+                <p>Максимальное значение: <b>${max}</b></p>
+                <p>Минимальное значение: <b>${min}</b></p>
+            `;
+        }
+    </script>
+    <style>
+        .positive { color: green; }
+        .negative { color: red; }
+        .zero { color: black; }
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px 10px; }
+        th { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 7
+        <hr>
+    </header>
+
+    <main>
+        <button onclick="showStockTable()">Курс акций Русснефть</button>
+        <table border="1" id="stock-table"></table>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
