@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс евро</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+        .exchange-rate-container {
+            background-color: #fff;
+            border: 2px solid Magenta;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .exchange-rate-container h2 {
+            color: Magenta;
+            margin-bottom: 10px;
+        }
+        .rate {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .date, .previous-rate, .difference {
+            font-size: 1em;
+            margin: 5px 0;
+        }
+        .difference.positive {
+            color: green;
+        }
+        .difference.negative {
+            color: red;
+        }
+        .source-link {
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        .source-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .source-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function getEuroExchangeRate() {
+            const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    const currentRate = json.Valute.EUR.Value;
+                    const previousRate = json.Valute.EUR.Previous;
+                    const date = new Date(json.Date);
+                    const dateString = date.toLocaleString('ru-RU', { dateStyle: 'full', timeStyle: 'short' });
+                    const difference = currentRate - previousRate;
+                    const differenceAbs = Math.abs(difference).toFixed(4);
+                    const differenceSign = difference > 0 ? 'повысился' : (difference < 0 ? 'понизился' : 'не изменился');
+
+                    const container = document.getElementById('exchange-rate-container');
+                    container.innerHTML = `
+                        <h2>Текущий курс евро</h2>
+                        <div class="rate">${currentRate.toFixed(4)} ₽</div>
+                        <div class="date">Дата запроса: ${dateString}</div>
+                        <div class="previous-rate">Курс за предыдущий день: ${previousRate.toFixed(4)} ₽</div>
+                        <div class="difference ${difference > 0 ? 'positive' : (difference < 0 ? 'negative' : '')}">
+                            Разница: ${differenceSign} на ${differenceAbs} ₽
+                        </div>
+                        <div class="source-link">
+                            Источник данных: <a href="https://www.cbr-xml-daily.ru/" target="_blank" rel="noopener noreferrer">https://www.cbr-xml-daily.ru/</a>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    const container = document.getElementById('exchange-rate-container');
+                    container.innerHTML = '<p style="color: red;">Ошибка при получении данных о курсе евро.</p>';
+                    console.error('Error fetching exchange rate:', error);
+                });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 7
+        <hr>
+    </header>
+
+    <main>
+        <button onclick="getEuroExchangeRate()">Получить курс евро</button>
+        <div id="exchange-rate-container" class="exchange-rate-container"></div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
