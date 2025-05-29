@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз и факт погоды в Новосибирске</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingElement = document.getElementById('loading');
+            const errorElement = document.getElementById('error');
+
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            const todayStr = today.toISOString().split('T')[0];
+            const yesterdayStr = yesterday.toISOString().split('T')[0];
+            
+            const currentWeatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&current=temperature_2m,relative_humidity_2m&timezone=Asia%2FBangkok';
+
+            const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m&start_date=${todayStr}&end_date=${todayStr}&timezone=Asia%2FBangkok`;
+
+            const pastWeatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m&start_date=${yesterdayStr}&end_date=${yesterdayStr}&timezone=Asia%2FBangkok`;
+            
+            Promise.all([
+                fetch(currentWeatherUrl).then(res => res.json()),
+                fetch(forecastUrl).then(res => res.json()),
+                fetch(pastWeatherUrl).then(res => res.json())
+            ])
+            .then(([currentData, forecastData, pastData]) => {
+                loadingElement.style.display = 'none';
+
+                if (currentData.current) {
+                    document.getElementById('current-temp').textContent = `${currentData.current.temperature_2m} °C`;
+                    document.getElementById('current-humidity').textContent = `${currentData.current.relative_humidity_2m} %`;
+                } else {
+                    throw new Error('Текущие данные о погоде не получены');
+                }
+
+                if (forecastData.hourly && forecastData.hourly.time && forecastData.hourly.temperature_2m) {
+                    createChart(
+                        'forecastCanvas', 
+                        forecastData.hourly.time, 
+                        forecastData.hourly.temperature_2m, 
+                        'Прогноз температуры на ' + formatDate(today),
+                        'rgba(54, 162, 235, 0.7)'
+                    );
+                } else {
+                    throw new Error('Данные прогноза не получены');
+                }
+                if (pastData.hourly && pastData.hourly.time && pastData.hourly.temperature_2m) {
+                    createChart(
+                        'pastCanvas', 
+                        pastData.hourly.time, 
+                        pastData.hourly.temperature_2m, 
+                        'Фактическая температура за ' + formatDate(yesterday),
+                        'rgba(255, 99, 132, 0.7)'
+                    );
+                } else {
+                    throw new Error('Фактические данные за прошлый день не получены');
+                }
+            })
+            .catch(error => {
+                loadingElement.style.display = 'none';
+                errorElement.style.display = 'block';
+                errorElement.textContent = `Ошибка: ${error.message}`;
+                console.error('Ошибка:', error);
+            });
+            
+            function formatDate(date) {
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                return date.toLocaleDateString('ru-RU', options);
+            }
+            
+            function formatTime(timeStr) {
+                const date = new Date(timeStr);
+                return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+            }
+            
+            function createChart(canvasId, timeData, tempData, label, color) {
+                const ctx = document.getElementById(canvasId).getContext('2d');
+
+                const labels = timeData.map(time => formatTime(time));
+                
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: label,
+                            data: tempData,
+                            backgroundColor: color,
+                            borderColor: color.replace('0.7', '1'),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'Температура (°C)'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Время'
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.raw} °C`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    <style>
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .current-weather {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        .current-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0d47a1;
+        }
+        .chart-container {
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: #666;
+        }
+        .error {
+            color: #d32f2f;
+            background-color: #ffebee;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 7
+    </header>
+    <main>
+        <div class="header">
+        <h1>Погода в Новосибирске</h1>
+        <p>Прогноз и фактические данные</p>
+    </div>
+
+    <div id="current-weather" class="current-weather">
+        <div>
+            <div>Текущая температура</div>
+            <div id="current-temp" class="current-value">— °C</div>
+        </div>
+        <div>
+            <div>Текущая влажность</div>
+            <div id="current-humidity" class="current-value">— %</div>
+        </div>
+    </div>
+
+    <div id="forecast-chart" class="chart-container">
+        <div class="chart-title">Прогноз температуры на сегодня</div>
+        <canvas id="forecastCanvas"></canvas>
+    </div>
+
+    <div id="past-chart" class="chart-container">
+        <div class="chart-title">Фактическая температура за вчера</div>
+        <canvas id="pastCanvas"></canvas>
+    </div>
+
+    <div id="loading" class="loading">Загрузка данных о погоде...</div>
+    <div id="error" class="error" style="display: none;"></div>
+    </main>
+
+    <footer>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
