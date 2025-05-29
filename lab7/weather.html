@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Температура сегодня</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon-16x16.png">
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <script>
+        function getTemperatures() {
+        let tempsDiv = document.getElementById('temps');
+        tempsDiv.textContent = 'Загрузка...';
+
+        let latitude = 55.0415;
+        let longitude = 82.9346;
+        let timezone = 'Asia/Bangkok';
+        let today = new Date().toISOString().slice(0, 10);
+        let url = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude +
+                    '&longitude=' + longitude +
+                    '&hourly=temperature_2m&timezone=' + encodeURIComponent(timezone) +
+                    '&start_date=' + today + '&end_date=' + today;
+
+        fetch(url)
+            .then(function(response) {
+            if (!response.ok) throw new Error('Ошибка сети');
+            return response.json();
+            })
+            .then(function(data) {
+            let times = data.hourly.time;
+            let temps = data.hourly.temperature_2m;
+            let hours = ['08:00', '12:00', '20:00'];
+
+            let html = hours.map(function(h) {
+                let timeStr = today + 'T' + h;
+                let idx = times.indexOf(timeStr);
+                let temp = idx !== -1 ? temps[idx] : 'нет данных';
+                return '<div class="temp-item">Температура в ' + h + ': <strong>' + temp + '</strong>°C</div>';
+            }).join('');
+
+            tempsDiv.innerHTML = html;
+            })
+            .catch(function(error) {
+            tempsDiv.textContent = 'Ошибка при получении данных';
+            console.error(error);
+            });
+    }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная 7
+        <hr>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Температура сегодня</h1>
+            <button onclick="getTemperatures()">Показать температуру</button>
+            <div id="temps"></div>
+        </div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Вотчинникова Анна, ФБИ-33, 2 курс, 2025
+    </footer>
+</body>
+</html>
