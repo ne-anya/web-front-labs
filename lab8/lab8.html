@@ -28,6 +28,14 @@
             <div>Имя: {{ user.name }}</div>
             <div>Возраст: {{ user.age }}</div>
             <div>Телефон: {{ user.tel }}</div>
+            <hr>
+
+            <h2>Цветы:</h2>
+            <ul>
+                <li v-for="flower in flowers">
+                    {{ flower }}
+                </li>
+            </ul>
         </div>
     </main>
 
@@ -47,7 +55,8 @@
                         name: 'Анна',
                         age: '19',
                         tel: '867-71-65',
-                    }
+                    },
+                    flowers: ['роза','тюльпан','маргаритка','георгин','одуванчик'],
                 }
             },
             methods: {
